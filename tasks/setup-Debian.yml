@@ -1,4 +1,12 @@
 ---
+
+- name: Remove OracleJDK
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ oracle_jdk_packages }}"
+  when: oracle_jdk_packages is defined and not keep_oracle_jdk
+
 - name: Add jessie-backports if needed
   apt_repository:
       repo: 'deb http://ftp.debian.org/debian jessie-backports main'
