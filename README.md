@@ -35,7 +35,8 @@ CA certificates can be added to the java keystore with the following variables:
 ```
 
 This role uninstall OracleJDK by default. You can change the
-`keep_oracle_jdk` variable to keep it.
+`keep_oracle_jdk` variable to keep it. This is only available 
+on Debian distributions.
 
 ## Dependencies
 
