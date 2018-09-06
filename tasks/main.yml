@@ -46,4 +46,4 @@
   with_items:
     - bouncycastle/bcprov-jdk15on-1.51.jar
     - bouncycastle/bcpkix-jdk15on-1.51.jar
-  when: java_home is defined and java_home != ''
+  when: add_bouncycastle and java_home is defined and java_home != ''
