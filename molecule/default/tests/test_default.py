@@ -16,6 +16,7 @@ def test_java_binary(host):
     run1 = host.run('java -version')
     assert run1.rc == 0
 
+
 def test_jce(host):
     cmd = "java -cp /tmp Main"
     run = host.run(cmd)
