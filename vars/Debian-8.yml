@@ -5,7 +5,7 @@
 #   - openjdk-7-jdk
 __java_packages:
   - ca-certificates-java
-  - openjdk-8-jdk
+  - openjdk-8-jre-headless
 
 oracke_jdk_packages:
   - oracle-java8-installer

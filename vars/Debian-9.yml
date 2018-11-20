@@ -3,7 +3,7 @@
 #   - java
 #   - openjdk-8-jdk
 __java_packages:
-  - openjdk-8-jdk
+  - openjdk-8-jre-headless
 
 oracle_jdk_packages:
   - oracle-java8-installer
