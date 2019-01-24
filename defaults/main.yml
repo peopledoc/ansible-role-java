@@ -11,8 +11,8 @@ devsecops_ca:
 app_certificates: []
 ca_certificates_password: "changeit"
 ca_certificates:
-  certificates: {{ app_certificates + devsecops_ca if devsecops_ca_enabled else app_certificates}}
-  password: {{ca_certificates_password}}
+  certificates: "{{ app_certificates + devsecops_ca if devsecops_ca_enabled else app_certificates }}"
+  password: "{{ ca_certificates_password }}"
 default_keystore_password: "changeit"
 keep_oracle_jdk: false
 add_bouncycastle: false
