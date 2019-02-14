@@ -14,7 +14,10 @@ Available variables are listed below, along with default values:
 
     # The defaults provided by this role are specific to each distribution.
     java_packages:
-      - java-1.7.0-openjdk
+      - openjdk-11-jdk
+    openjdk_version: 11
+    java_home: /usr/lib/jvm/java-11-openjdk-amd64
+    
 
 Set the version/development kit of Java to install, along with any other necessary Java packages.
 By default, it will try to install OpenJDK 8, even if it is not feasible (it will fail, in that case).
@@ -22,6 +25,7 @@ By default, it will try to install OpenJDK 8, even if it is not feasible (it wil
 CA certificates can be added to the java keystore with the following variables:
 
 ```yaml
+cacerts_location: ...            # Role default: "jre/lib/security/cacerts", it may be needed to be change according to the installed jdk version
 ca_certificates_password: ...    # Role default: "changeit", but you should define your own from vault
 devsecops_ca_enabled: True|False # Role default: true, for the local should be false 
 app_certificates:                # Role default: [], the app can define its own certificates
@@ -38,6 +42,7 @@ This role uninstall OracleJDK by default. You can change the
 `keep_oracle_jdk` variable to keep it. This is only available on
 Debian distributions. `add_bouncycastle` can be used to add
 bouncycastle libs to the JDK.
+
 
 ## Dependencies
 

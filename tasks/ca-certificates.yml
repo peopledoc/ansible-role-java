@@ -6,7 +6,7 @@
   check_mode: false
 
 - name: Check if Java keystore use default password
-  command: "keytool -list -keystore {{ JAVA_HOME.stdout }}/jre/lib/security/cacerts -storepass {{ default_keystore_password }}"
+  command: "keytool -list -keystore {{ JAVA_HOME.stdout }}/{{ cacerts_location }} -storepass {{ default_keystore_password }}"
   register: keytool_list
   ignore_errors: yes
   changed_when: false
@@ -14,7 +14,7 @@
   check_mode: false
 
 - name: Set Java keystore password
-  command: "keytool -storepasswd -new {{ ca_certificates.password }} -storepass {{ default_keystore_password }} -keystore {{ JAVA_HOME.stdout }}/jre/lib/security/cacerts"
+  command: "keytool -storepasswd -new {{ ca_certificates.password }} -storepass {{ default_keystore_password }} -keystore {{ JAVA_HOME.stdout }}/{{ cacerts_location }}"
   when:
     - keytool_list is success
     - default_keystore_password != ca_certificates.password # update password only if required
@@ -25,7 +25,7 @@
     cert_alias: "{{ item.alias|default(omit) }}"
     cert_url: "{{ item.url|default(omit) }}"
     cert_path: "{{ item.path|default(omit) }}"
-    keystore_path: "{{ JAVA_HOME.stdout }}/jre/lib/security/cacerts"
+    keystore_path: "{{ JAVA_HOME.stdout }}/{{ cacerts_location }}"
     keystore_pass: "{{ ca_certificates.password }}"
     state: present
   with_items: "{{ ca_certificates.certificates }}"

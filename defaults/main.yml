@@ -3,7 +3,9 @@
 # default (OpenJDK 1.7).
 # java_packages: []
 
-java_home: ""
+openjdk_version: 8
+java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
+cacerts_location: "jre/lib/security/cacerts"
 devsecops_ca_enabled: true
 devsecops_ca:
   - alias: peopledoc-ca
