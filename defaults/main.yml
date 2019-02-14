@@ -4,7 +4,7 @@
 # java_packages: []
 
 openjdk_version: 8
-java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
+java_home: "/usr/lib/jvm/java-{{ openjdk_version }}-openjdk-amd64"
 cacerts_location: "jre/lib/security/cacerts"
 devsecops_ca_enabled: true
 devsecops_ca:
