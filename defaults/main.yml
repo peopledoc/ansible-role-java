@@ -5,7 +5,7 @@
 
 openjdk_version: 8
 java_home: "/usr/lib/jvm/java-{{ openjdk_version }}-openjdk-amd64"
-cacerts_location: "jre/lib/security/cacerts"
+cacerts_location: "{{ 'lib/security/cacerts' if openjdk_version == 11 else 'jre/lib/security/cacerts' }}"
 devsecops_ca_enabled: true
 devsecops_ca:
   - alias: peopledoc-ca
