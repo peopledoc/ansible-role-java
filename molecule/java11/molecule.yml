@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: molecule_test_instance-debian-8
+    image: ${BASE_IMAGE:-debian:stretch}
+
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+    enabled: False
+scenario:
+  name: java11
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - check # added to verify --check
+    - side_effect
+    - verify
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
