@@ -6,6 +6,7 @@
 openjdk_version: 8
 java_home: "/usr/lib/jvm/java-{{ openjdk_version }}-openjdk-amd64"
 cacerts_location: "{{ 'lib/security/cacerts' if openjdk_version == 11 else 'jre/lib/security/cacerts' }}"
+jre_lib_location: "{{ 'lib/ext/' if openjdk_version == 11 else 'jre/lib/ext/' }}"
 devsecops_ca_enabled: true
 devsecops_ca:
   - alias: peopledoc-ca
@@ -18,3 +19,7 @@ ca_certificates:
 default_keystore_password: "changeit"
 keep_oracle_jdk: false
 add_bouncycastle: false
+bouncycastle_version: '1.51'
+bouncycastle_artifacts:
+  - bcpkix
+  - bcprov
