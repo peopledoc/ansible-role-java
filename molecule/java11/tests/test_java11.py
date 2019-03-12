@@ -32,11 +32,3 @@ def test_jce(host):
     cmd += "(javax.crypto.Cipher.getMaxAllowedKeyLength(\"RC5\") >= 256);'"
     run = host.run(cmd)
     assert 'true' in run.stdout
-
-
-def test_bouncycastle(host):
-    lib_path = '/usr/lib/jvm/java-11-openjdk-amd64/lib/ext/'
-    jar1 = lib_path + 'bcpkix-jdk15on-1.51.jar'
-    assert host.file(jar1).exists
-    jar2 = lib_path + 'bcprov-jdk15on-1.51.jar'
-    assert host.file(jar2).exists
