@@ -4,10 +4,11 @@
   become: yes
   roles:
     - role: ansible-role-java
-      install_cryptography_extension: True
+      install_cryptography_extension: true
       ca_certificates:
         certificates:
           - alias: dummy-test
             path: /usr/local/share/ca-certificates/dummy.crt
           - url: google.com
         password: test123
+      add_bouncycastle: true
