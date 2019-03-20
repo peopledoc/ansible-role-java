@@ -21,8 +21,8 @@
 
 - name: CA certificates installation
   include_tasks: ca-certificates.yml
-  when: ca_certificates.certificates != []
-
+  when: devsecops_ca_enabled || app_certificates != []
+  
 - name: Download bouncycastle jars in JRE external libs
   get_url:
     url: 'http://repo2.maven.org/maven2/org/bouncycastle/{{ item }}-jdk15on/{{ bouncycastle_version }}/{{ item }}-jdk15on-{{ bouncycastle_version }}.jar'
