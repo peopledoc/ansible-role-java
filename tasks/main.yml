@@ -21,6 +21,7 @@
 
 - name: CA certificates installation
   include_tasks: ca-certificates.yml
+  when: ca_certificates.certificates != []
 
 - name: Download bouncycastle jars in JRE external libs
   get_url:
