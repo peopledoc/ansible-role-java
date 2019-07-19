@@ -23,3 +23,4 @@ bouncycastle_version: '1.51'
 bouncycastle_artifacts:
   - bcpkix
   - bcprov
+stretch_backports_repository: deb.debian.org

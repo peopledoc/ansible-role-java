@@ -32,3 +32,9 @@ def test_jce(host):
     cmd += "(javax.crypto.Cipher.getMaxAllowedKeyLength(\"RC5\") >= 256);'"
     run = host.run(cmd)
     assert 'true' in run.stdout
+
+
+def test_https_request(host):
+    cmd = 'cd /usr/local/bin && java App'
+    run = host.run(cmd)
+    assert '200' in run.stdout
