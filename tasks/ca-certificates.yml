@@ -29,3 +29,17 @@
     keystore_pass: "{{ ca_certificates.password }}"
     state: present
   with_items: "{{ ca_certificates.certificates }}"
+
+# Workaround for https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=894979
+# This only happens on Stretch with Java 11 via stretch-backports.
+# This bug is fixed in ca-certificates-java in Buster.
+- name: Check format of keystore (stretch-backports)
+  stat:
+    path: /etc/ssl/certs/java/cacerts
+  register: cacert_stat
+  when: ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages
+
+- name: Migrate keystore to JKS (stretch-backports)
+  command: "keytool -importkeystore -srckeystore /etc/ssl/certs/java/cacerts -destkeystore /etc/ssl/certs/java/cacerts -srcstoretype PKCS12 -deststoretype JKS -srcstorepass {{ ca_certificates.password }} -deststorepass {{ ca_certificates.password }}"
+  changed_when: true
+  when: ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages and "application/octet-stream" in cacert_stat.stat.mimetype

@@ -12,3 +12,10 @@
         owner: root
         group: root
         mode: 0644
+    - name: Copy Java HTTPS test class (request to https://www.google.com)
+      copy:
+        src: App.class
+        dest: /usr/local/bin/App.class
+        owner: root
+        group: root
+        mode: 0755
