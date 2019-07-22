@@ -11,13 +11,13 @@
   apt_repository:
       repo: 'deb http://ftp.debian.org/debian jessie-backports main'
       state: present
-      update_cache: true
   when: ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages
 
 - name: Ensure Java is installed (jessie + jdk8).
   apt:
     name: "{{ java_packages }}"
     default_release: jessie-backports
+    update_cache: true
     state: present
   when: ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages
 
@@ -25,7 +25,6 @@
   apt_repository:
       repo: 'deb http://{{ stretch_backports_repository }}/debian stretch-backports main'
       state: present
-      update_cache: true
   when: ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages
 
 - name: Ensure Java is installed (stretch + jdk11).
