@@ -2,11 +2,7 @@
 
 [![Build Status](https://travis-ci.org/peopledoc/ansible-role-java.svg?branch=master)](https://travis-ci.org/peopledoc/ansible-role-java)
 
-Installs OpenJDK Java for RedHat/CentOS and Debian/Ubuntu linux servers.
-
-## Requirements
-
-None.
+Installs OpenJDK Java for Debian linux servers.
 
 ## Role Variables
 
@@ -20,7 +16,7 @@ Available variables are listed below, along with default values:
 
 
 Set the version/development kit of Java to install, along with any other necessary Java packages.
-By default, it will try to install OpenJDK 8, even if it is not feasible (it will fail, in that case).
+By default, on Debian Buster, Java 11 will be installed. On older Debian, Java 8 will be installed.
 
 CA certificates can be added to the java keystore with the following variables:
 
@@ -60,14 +56,14 @@ None.
 
 ## Dependencies for tests
 
-The dependencies are `ansible`, `molecule` and `docker-py` Python packages.
+The dependencies are `ansible`, `molecule` and `docker` Python packages.
 
 ## Tests
 
 Tests can be executed using:
 
 ```
-$ molecule --debug test --driver-name docker
+$ molecule test --all
 ```
 
 ## License
