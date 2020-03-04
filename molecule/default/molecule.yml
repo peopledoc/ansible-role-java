@@ -7,12 +7,8 @@ lint:
   name: yamllint
   enabled: False
 platforms:
-#  - name: molecule_test_instance-debian-9
-#    image: ${BASE_IMAGE:-debian:stretch}
-#  - name: molecule_test_instance-fedora27
-#    image: ${BASE_IMAGE:-fedora:27}
-  - name: molecule_test_instance-debian-8
-    image: ${BASE_IMAGE:-debian:jessie}
+  - name: molecule_test_instance-debian
+    image: ${BASE_IMAGE:-debian:stretch}
 
 provisioner:
   name: ansible
