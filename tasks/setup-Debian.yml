@@ -1,11 +1,10 @@
 ---
-
 - name: Remove OracleJDK
   apt:
     name: "{{ oracle_jdk_packages }}"
     state: absent
     purge: true
-  when: oracle_jdk_packages is defined and not keep_oracle_jdk|bool
+  when: oracle_jdk_packages is defined
 
 - name: Add jessie-backports if needed
   apt_repository:
@@ -43,7 +42,7 @@
   when: not(ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages) or not(ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages)
 
 - name: Get openjdk alternative
-  shell: "update-java-alternatives -l | grep java-1.{{ openjdk_version }}.0-openjdk | cut -f -1 -d ' '"
+  shell: "update-java-alternatives -l | grep java-1.{{ openjdk_version }}.0-openjdk | cut -f -1 -d ' '"
   changed_when: false
   register: openjdk_alternative
   check_mode: false

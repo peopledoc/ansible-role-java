@@ -7,8 +7,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def test_packages(host):
-    assert (host.package('openjdk-8-jdk').is_installed
-            or host.package('java-1.8.0-openjdk').is_installed)
+    if host.system_info.codename == 'buster':
+        assert host.package('openjdk-11-jdk').is_installed
+    else:
+        assert (host.package('openjdk-8-jdk').is_installed
+                or host.package('java-1.8.0-openjdk').is_installed)
 
 
 def test_binaries(host):
@@ -22,11 +25,15 @@ def test_binaries(host):
     javac = host.run('javac -version')
     assert javac.rc == 0
 
-    javac_version = javac.stderr.split()[1]
+    javac_version = ''
+    if host.system_info.codename == 'buster':
+        javac_version = javac.stdout.split()[1]
+    else:
+        javac_version = javac.stderr.split()[1]
 
     java_version = run1.stderr.split('\n')[0]
 
-    assert java_version == 'openjdk version "%s"' % javac_version
+    assert 'openjdk version "%s"' % javac_version in java_version
 
 
 def test_jce(host):
@@ -37,8 +44,9 @@ def test_jce(host):
 
 
 def test_bouncycastle(host):
-    lib_path = '/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/'
-    jar1 = lib_path + 'bcpkix-jdk15on-1.51.jar'
-    assert host.file(jar1).exists
-    jar2 = lib_path + 'bcprov-jdk15on-1.51.jar'
-    assert host.file(jar2).exists
+    if host.system_info.codename != 'buster':
+        lib_path = '/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/'
+        jar1 = lib_path + 'bcpkix-jdk15on-1.51.jar'
+        assert host.file(jar1).exists
+        jar2 = lib_path + 'bcprov-jdk15on-1.51.jar'
+        assert host.file(jar2).exists

@@ -1,19 +1,20 @@
 sudo: required
-dist: trusty
+dist: bionic
 
 language: python
 python:
-- '2.7'
-- '3.6'
+- '3.7'
 
 env:
   matrix:
-  - ANSIBLE_REF='ansible<2.6' BASE_IMAGE=debian:stretch
-  - ANSIBLE_REF='ansible<2.5' BASE_IMAGE=debian:stretch
+  - ANSIBLE_REF='ansible~=2.9.0' BASE_IMAGE=debian:stretch
+  - ANSIBLE_REF='ansible~=2.8.0' BASE_IMAGE=debian:stretch
+  - ANSIBLE_REF='ansible~=2.9.0' BASE_IMAGE=debian:buster
+  - ANSIBLE_REF='ansible~=2.8.0' BASE_IMAGE=debian:buster
 
 install:
   - travis_retry pip install --upgrade pip setuptools wheel
-  - travis_retry pip install "${ANSIBLE_REF}" molecule docker-py
+  - travis_retry pip install "${ANSIBLE_REF}" 'molecule==2.22' docker
 
 script:
-  - molecule test --driver-name docker --all
+  - molecule test --all

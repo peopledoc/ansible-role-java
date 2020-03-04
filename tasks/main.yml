@@ -25,7 +25,7 @@
 
 - name: Download bouncycastle jars in JRE external libs
   get_url:
-    url: 'http://repo2.maven.org/maven2/org/bouncycastle/{{ item }}-jdk15on/{{ bouncycastle_version }}/{{ item }}-jdk15on-{{ bouncycastle_version }}.jar'
+    url: 'https://repo1.maven.org/maven2/org/bouncycastle/{{ item }}-jdk15on/{{ bouncycastle_version }}/{{ item }}-jdk15on-{{ bouncycastle_version }}.jar'
     dest: '{{ java_home }}/{{ jre_lib_location }}/{{ item }}-jdk15on-{{ bouncycastle_version }}.jar'
   with_items: '{{ bouncycastle_artifacts }}'
   when: add_bouncycastle and openjdk_version == 8 and java_home is defined and java_home != ''
