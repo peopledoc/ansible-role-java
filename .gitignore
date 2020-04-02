@@ -5,3 +5,4 @@ __pycache__/
 /molecule/*/.pytest_cache/
 /molecule/*/pytestdebug.log
 *.pyc
+.DS_Store
