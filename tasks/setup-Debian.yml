@@ -12,12 +12,12 @@
       state: present
   when: ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages
 
-- name: Ensure Java is installed (jessie + jdk8).
+- name: Ensure Java is installed and is the latest maintenance version (jessie + jdk8).
   apt:
     name: "{{ java_packages }}"
     default_release: jessie-backports
     update_cache: true
-    state: present
+    state: "{{ java_packages_expected_state }}"
   when: ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages
 
 - name: Add stretch-backports if needed
@@ -26,19 +26,19 @@
       state: present
   when: ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages
 
-- name: Ensure Java is installed (stretch + jdk11).
+- name: Ensure Java is installed and is the latest maintenance version (stretch + jdk11).
   apt:
     name: "{{ java_packages }}"
     default_release: stretch-backports
     update_cache: true
-    state: present
+    state: "{{ java_packages_expected_state }}"
   when: ansible_distribution == 'Debian' and ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages
 
-- name: Ensure Java is installed.
+- name: Ensure Java is installed and is the latest maintenance version .
   apt:
     name: "{{ java_packages }}"
     update_cache: true
-    state: present
+    state: "{{ java_packages_expected_state }}"
   when: not(ansible_distribution_release == 'jessie' and 'openjdk-8-jdk' in java_packages) or not(ansible_distribution_release == 'stretch' and 'openjdk-11-jdk' in java_packages)
 
 - name: Get openjdk alternative

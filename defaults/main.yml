@@ -23,3 +23,4 @@ bouncycastle_artifacts:
   - bcpkix
   - bcprov
 stretch_backports_repository: deb.debian.org
+java_packages_expected_state: present

@@ -18,6 +18,10 @@ Available variables are listed below, along with default values:
 Set the version/development kit of Java to install, along with any other necessary Java packages.
 By default, on Debian Buster, Java 11 will be installed. On older Debian, Java 8 will be installed.
 
+`java_packages_expected_state` can be used to indicate whether OpenJDK should only be installed or
+if we expect also to have the latest maintenance version. The expected values are "present" or "latest",
+knowing that by default it is set to "present".
+
 CA certificates can be added to the java keystore with the following variables:
 
 ```yaml
